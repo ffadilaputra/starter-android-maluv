@@ -1,87 +1,99 @@
 package org.ffadilaputra.boilerplate.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import org.ffadilaputra.boilerplate.R;
-import org.ffadilaputra.boilerplate.constant.AppConstant;
-import org.ffadilaputra.boilerplate.fragment.FragmentDrawer;
-import org.ffadilaputra.boilerplate.fragment.FriendsFragment;
-import org.ffadilaputra.boilerplate.fragment.HomeFragment;
-import org.ffadilaputra.boilerplate.fragment.MessagesFragment;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+import org.ffadilaputra.boilerplate.R;
+import org.ffadilaputra.boilerplate.constant.AppConstant;
+import org.ffadilaputra.boilerplate.util.ConstructNavigationViewUtil;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends AppCompatActivity implements ConstructNavigationViewUtil.NavigationViewListener {
 
     private static String TAG = MainActivity.class.getSimpleName();
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.adView)
+    AdView adView;
+    @BindView(R.id.nav_view)
+    NavigationView navView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
-    private Toolbar mToolbar;
-    private FragmentDrawer drawerFragment;
-
-    private AdView mAdView;
-    private View containerBody;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (getSupportActionBar() != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //navigation view configurations
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
-        drawerFragment = (FragmentDrawer)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
-        drawerFragment.setDrawerListener(this);
+        ConstructNavigationViewUtil navigationView = new ConstructNavigationViewUtil(navView);
+        navigationView.setNavigationViewListener(this);
 
-        // display the first navigation drawer view on app launch
-        displayView(0);
-        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
-        // values/strings.xml.
-        mAdView = (AdView) findViewById(R.id.adView);
-        if (AppConstant.BANNER_ADS_ENABLED == true) {
+        if (AppConstant.BANNER_ADS_ENABLED) {
             AdRequest adRequest = new AdRequest.Builder()
                     .addTestDevice(AppConstant.DEVICE_ID)
                     .build();
-            mAdView.loadAd(adRequest);
+            adView.loadAd(adRequest);
         } else {
-            containerBody = findViewById(R.id.container_body);
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) containerBody.getLayoutParams();
-            params.setMargins(0, 0, 0, 0);
-            mAdView.setMinimumHeight(0);
+            adView.setMinimumHeight(0);
         }
 
     }
 
+    @Override
+    public void onNavigationViewMenuClicked(MenuItem item) {
+        drawerLayout.closeDrawers();
+
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                drawerLayout.closeDrawers();
+                break;
+
+            case R.id.nav_friends:
+                startActivity(new Intent(this, FriendsActivity.class));
+                break;
+            case R.id.nav_messages:
+                startActivity(new Intent(this, MessagesActivity.class));
+                break;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -95,62 +107,20 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     @Override
-    public void onDrawerItemSelected(View view, int position) {
-        displayView(position);
-    }
-
-    private void displayView(int position) {
-        Fragment fragment = null;
-        String title = getString(R.string.app_name);
-        switch (position) {
-            case 0:
-                fragment = new HomeFragment();
-                title = getString(R.string.title_home);
-                break;
-            case 1:
-                fragment = new FriendsFragment();
-                title = getString(R.string.title_friends);
-                break;
-            case 2:
-                fragment = new MessagesFragment();
-                title = getString(R.string.title_messages);
-                break;
-            default:
-                break;
-        }
-
-        if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment);
-            fragmentTransaction.commit();
-
-            // set the toolbar title
-            getSupportActionBar().setTitle(title);
-        }
-    }
-
-    @Override
     protected void onPause() {
-        if (mAdView != null) {
-            mAdView.pause();
-        }
+        adView.pause();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (mAdView != null) {
-            mAdView.resume();
-        }
+        adView.resume();
     }
 
     @Override
     protected void onDestroy() {
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
+        adView.destroy();
         super.onDestroy();
     }
 }
