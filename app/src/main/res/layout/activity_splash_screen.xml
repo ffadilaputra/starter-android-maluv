@@ -3,31 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorPrimary"
-    tools:context=".activity.SplashScreen"
-    >
+    android:orientation="vertical"
+    tools:context=".activity.SplashScreen">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    />
+        android:layout_height="match_parent" />
 
-    <com.devspark.robototextview.widget.RobotoTextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <TextView
+        android:id="@+id/welcome_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/welcome_text"
-        android:id="@+id/welcome_text"
-        android:textSize="30dp"
+        android:gravity="center"
         android:alpha="0.0"
-        android:gravity="center_vertical|center_horizontal"
-        app:fontFamily="roboto"
-        app:textWeight="light"
-        app:textStyle="italic"
+        android:textStyle="italic"
+        android:text="@string/welcome_text"
         android:textColor="@android:color/white"
-        />
+        android:textSize="30sp" />
 
 </RelativeLayout>
