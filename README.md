@@ -1,15 +1,16 @@
-# AndroidAppTemplate
-Simple Android App Template
-Base code are from this great tutorial :
+# Starter Android Project
+
+Matur Suwun Mbah Ravi Tutorial e :
 http://www.androidhive.info/2015/04/android-getting-started-with-material-design/
 
-## Todo : 
-1. Base Template.
-2. Splashscreen.  
-3. Nav Drawer
-4. Google Analytics
-5. Admob Library
-6. Recycler View
+## Todo 
+- [ x ] Base Template.
+- [ x ] Splashscreen.  
+- [ x ] Nav Drawer
+- [ x ] Google Analytics
+- [ x ] Admob Library
+- [ x ] Recycler View
+- [] Firebase 
 
 ### Library
  - Retrofit
