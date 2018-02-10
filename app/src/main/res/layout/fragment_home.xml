@@ -1,0 +1,123 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.ffadilaputra.boilerplate.fragment.HomeFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+       <TextView
+        android:id="@+id/label"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="45dp"
+        android:text="HOME"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_below="@id/label"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="Edit fragment_home.xml to change the appearance" />
+
+
+    <TextView
+        android:id="@+id/label1"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="200dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="45dp"
+        android:text="HOME"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_below="@id/label1"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="Edit fragment_home.xml to change the appearance" />
+
+        <TextView
+        android:id="@+id/label2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="300dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="45dp"
+        android:text="HOME"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_below="@id/label2"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="Edit fragment_home.xml to change the appearance" />
+
+        <TextView
+        android:id="@+id/label3"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="400dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="45dp"
+        android:text="HOME"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_below="@id/label3"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="Edit fragment_home.xml to change the appearance" />
+
+        <TextView
+        android:id="@+id/label4"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="500dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="45dp"
+        android:text="HOME"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_below="@id/label4"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="Edit fragment_home.xml to change the appearance" />
+
+  </RelativeLayout>
+</ScrollView>
+
+
+</RelativeLayout>
